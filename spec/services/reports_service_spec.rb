@@ -6,12 +6,11 @@ describe ReportsService do
   let!(:personnel2) { build(:personnel) }
 
   context 'given a set of overlapping personnel' do
-    let!(:roster1) { build(:roster, personnel: personnel1, starship: startship) }
-    let!(:roster2) { build(:roster, personnel: personnel1, starship: startship) }
+    let!(:roster1) { build(:starship_roster, personnel: personnel1, starship: starship, start_date: Date.yesterday, end_date: Date.today) }
+    let!(:roster2) { build(:starship_roster, personnel: personnel1, starship: starship, start_date: Date.yesterday, end_date: Date.today) }
 
     it 'returns the set' do
-      byebug
-
+      expect(ReportsService.overlap_report).to equal true
     end
   end
 end
