@@ -57,7 +57,9 @@ puts "Creating 10 Starships"
     StarshipRoster.create(starship: starship, personnel: personnel, start_date: Faker::Date.backward(days: 214))
 
     puts "creating starship roster for random ship"
-    StarshipRoster.create(starship: Starship.all.sample, personnel: personnel, start_date: Faker::Date.backward(days: 504), end_date: Faker::Date.backward(days: 220), reason: roster_reason.sample)
+    start_date = Faker::Date.between(from: 500.days.ago, to: 450.days.ago)
+    end_date = Faker::Date.between(from: 220.days.ago, to: 200.days.ago)
+    StarshipRoster.create(starship: Starship.all.sample, personnel: personnel, start_date: start_date, end_date: end_date, reason: roster_reason.sample)
   end
 end
 
