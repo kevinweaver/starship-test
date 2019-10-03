@@ -4,6 +4,5 @@ FactoryBot.define do
     gender { "MyString" }
     species { "MyString" }
     affiliation { "MyString" }
-    string { "MyString" }
   end
 end
