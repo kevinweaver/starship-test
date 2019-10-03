@@ -1,0 +1,18 @@
+<h1>Starship Rosters</h1>
+<%= link_to 'Add Roster', new_starship_roster_path %> ||
+<%= link_to 'Back', personnels_path %><br><br>
+
+<div class="row">
+    <% @starship_rosters.each do |roster| %>
+    <div class="col-sm-3">
+      <%= "Starship: #{roster.starship.name}" %><br>
+      <%= "Personnel: #{roster.personnel.name}" %><br>
+      <%= "Start Date: #{roster.start_date}" %><br>
+      <%= "End Date: #{roster.end_date}" %><br>
+      <%= "Reason: #{roster.reason}" %><br>
+      <button type="button" class="badge badge-dark">
+        <%= link_to 'Destroy', roster, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </button><br><br>
+    </div>
+    <% end %>
+</div>

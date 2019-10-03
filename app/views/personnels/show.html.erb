@@ -1,0 +1,79 @@
+<% personnel = @personnel %>
+
+<div class="row">
+  <div class="col-sm-6">
+    <h1> Personnel: </h1>
+      <strong>Name:</strong>
+      <%= personnel.name %><br>
+
+      <strong>Gender:</strong>
+      <%= personnel.gender %><br>
+
+      <strong>Species:</strong>
+      <%= personnel.species %><br>
+
+      <strong>Affiliation:</strong>
+      <%= personnel.affiliation %><br>
+
+      <strong>Occupation:</strong>
+      <% personnel.occupations.all.each do |occupation| %>
+      <%= occupation.title %>
+      <%= occupation.start_date %>
+      <%= occupation.end_date %>
+      <% end %><br>
+
+      <strong>Status:</strong>
+      <% personnel.personnel_statuses.all.each do |status| %>
+      <%= status.title %>
+      <%= status.start_date %>
+      <%= status.end_date %>
+      <% end %><br>
+
+      <strong>Rank(s):</strong><br><br>
+      <% @ordered_ranks.each do |rank| %>
+        <h5><%= rank.title %></h5>
+        <strong>Start Date:</strong>
+        <%= rank.start_date %><br>
+        <% unless rank.end_date.nil? %>
+          <strong>End Date:</strong>
+          <%= rank.end_date %><br><br>
+        <% end %>
+
+        <% if rank.title == "Captain" %>
+          <%= render 'captains_logs/logs', locals: {personnel: @personnel} %>
+        <% end %>
+      <% end %><br>
+
+    <%= link_to 'Edit', edit_personnel_path(@personnel) %> |
+    <%= link_to 'Back', personnels_path %>
+  </div>
+
+  <div class="col-sm-6">
+    <% if personnel.starships.any? %>
+      <h1> Starship Member: </h1>
+      <p>
+        <% personnel.starships.each do |starship| %>
+
+          <% member = StarshipRoster.find_by(personnel: personnel, starship: starship) %>
+
+          <strong>Name:</strong>
+          <%= starship.name %><br>
+
+          <strong>Class Name:</strong>
+          <%= starship.class_name %><br>
+
+          <strong>Registry:</strong>
+          <%= starship.registry %><br>
+
+          <strong>Start Date:</strong>
+          <%= member.start_date %><br>
+          <% unless member.end_date.nil? %>
+            <strong>End Date:</strong>
+            <%= member.end_date %>
+          <% end %>
+          <br><br>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+</div>

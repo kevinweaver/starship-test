@@ -1,0 +1,7 @@
+<div class="col-sm-6">
+  <h4>Captain's Logs:</h4>
+    <%  @personnel.captains_logs.all.each do |log| %>
+      <%= "Star Date: #{log.star_date}" %><br>
+      <%= "Message: #{log.message}" %><br><br>
+    <% end %>
+</div>
